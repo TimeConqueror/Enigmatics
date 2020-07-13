@@ -40,7 +40,7 @@ minecraft {
     // These can be tweaked, removed, or duplicated as needed.
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
-    def extraArgs = 'mixin.env.disableRefMap=true'.split(' ')
+    def extraArgs = Arrays.asList('mixin.env.disableRefMap=true'.split(' '))
     runs {
         client {
             workingDirectory project.file('run')
@@ -51,10 +51,7 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'debug'
 
-            def newArgs = new ArrayList()
-            newArgs.addAll(args)
-            newArgs.addAll(extraArgs)
-            setArgs(newArgs)
+            setArgs(extraArgs)
 
             mods {
                 timecore {
@@ -76,10 +73,7 @@ minecraft {
             // Recommended logging level for the console
             //property 'forge.logging.console.level', 'debug'
 
-            def newArgs = new ArrayList()
-            newArgs.addAll(args)
-            newArgs.addAll(extraArgs)
-            setArgs(newArgs)
+            setArgs(extraArgs)
 
             mods {
                 timecore {
@@ -102,10 +96,7 @@ minecraft {
 //            property 'forge.logging.console.level', 'debug'
 
             args '--mod', 'lootgames', '--all', '--output', ("\"" + projectDir.path + "/src/main/resources/\"")
-            def newArgs = new ArrayList()
-            newArgs.addAll(args)
-            newArgs.addAll(extraArgs)
-            setArgs(newArgs)
+            setArgs(extraArgs)
 
             mods {
                 timecore {
