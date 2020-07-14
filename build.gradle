@@ -111,7 +111,7 @@ minecraft {
 repositories {
     maven {
         name = "TimeConqueror's Maven"
-        url = "https://raw.github.com/TimeConqueror/maven/master"
+        url = "https://raw.githubusercontent.com/TimeConqueror/maven/master"
     }
 //    maven {
 //        url = "./localmaven"
@@ -133,7 +133,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.31'
 
-    implementation 'ru.timeconqueror:TimeCore:1.15.2-1.1.0.0:deobf-20200710'
+    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-1.1.0.+', classifier:'deobf-20200710', changing: true
 
     runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.2.12")
 
