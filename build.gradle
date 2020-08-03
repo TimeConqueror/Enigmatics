@@ -36,11 +36,11 @@ minecraft {
     
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
+    def extraArgs = []
+    def extraJvmArgs = Arrays.asList('-Dmixin.env.disableRefMap=true'.split(' '))
+
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    def extraArgs = Arrays.asList('mixin.env.disableRefMap=true'.split(' '))
     runs {
         client {
             workingDirectory project.file('run')
@@ -52,6 +52,7 @@ minecraft {
             property 'forge.logging.console.level', 'debug'
 
             setArgs(extraArgs)
+            setJvmArgs(extraJvmArgs)
 
             mods {
                 timecore {
@@ -74,6 +75,7 @@ minecraft {
             //property 'forge.logging.console.level', 'debug'
 
             setArgs(extraArgs)
+            setJvmArgs(extraJvmArgs)
 
             mods {
                 timecore {
@@ -97,6 +99,7 @@ minecraft {
 
             args '--mod', 'lootgames', '--all', '--output', ("\"" + projectDir.path + "/src/main/resources/\"")
             setArgs(extraArgs)
+            setJvmArgs(extraJvmArgs)
 
             mods {
                 timecore {
@@ -124,6 +127,10 @@ repositories {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
     }
+    maven {
+        name = 'sponge'
+        url = 'https://repo.spongepowered.org/maven'
+    }
     mavenCentral()
 }
 
@@ -133,7 +140,10 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.31'
 
-    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-1.1.0.+', classifier:'deobf-20200710', changing: true
+    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-2.0.0.+', classifier:'deobf-20200710', changing: true
+    compile("org.spongepowered:mixin:0.8") {
+        transitive = false
+    }
 
     runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.2.12")
 
