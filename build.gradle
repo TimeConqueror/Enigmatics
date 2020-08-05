@@ -60,7 +60,7 @@ minecraft {
             setJvmArgs(extraJvmArgs)
 
             mods {
-                timecore {
+                enigmatics {
                     source sourceSets.main
 
                     resource sourceSets.main.resources
@@ -81,7 +81,7 @@ minecraft {
             setJvmArgs(extraJvmArgs)
 
             mods {
-                timecore {
+                enigmatics {
                     source sourceSets.main
 
                     resource sourceSets.main.resources
@@ -103,7 +103,7 @@ minecraft {
             setJvmArgs(extraJvmArgs)
 
             mods {
-                timecore {
+                enigmatics {
                     source sourceSets.main
                 }
             }
@@ -119,10 +119,8 @@ repositories {
     maven {
         name = "TimeConqueror's Maven"
         url = "https://raw.githubusercontent.com/TimeConqueror/maven/master"
+        artifactUrls 'https://github.com/TimeConqueror/maven/blob/master/' //fallback url
     }
-//    maven {
-//        url = "./localmaven"
-//    }
     flatDir {
         dirs 'libs', 'runtimeMods'
     }
@@ -138,18 +136,13 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    // configuration that holds jars to include in the jar
-    implementation.extendsFrom(shade)
-}
-
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.31'
 
-    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-2.0.0.+', classifier:'deobf-20200710', changing: true
+    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-2.1.0.+', classifier:'deobf-20200710', changing: true
     compile("org.spongepowered:mixin:0.8") {
         transitive = false
     }
@@ -157,9 +150,6 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.2.12")
 
     compileOnly 'org.jetbrains:annotations:18.0.0'
-
-    shade "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    shade "org.jetbrains.kotlin:kotlin-reflect"
 
     file("runtimeMods").eachFile { file ->
         def splitPos = file.name.lastIndexOf("-")
@@ -186,14 +176,6 @@ jar {
                 "Implementation-Vendor"   : "Time_Conqueror, Dizzlepop12",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
         ])
-    }
-
-    configurations.shade.each { dep ->
-        from(project.zipTree(dep)) {
-            exclude 'META-INF/*.RSA'
-            exclude 'META-INF/*.SF'
-            exclude("META-INF/services/cpw.mods.modlauncher.*")
-        }
     }
 }
 
