@@ -150,6 +150,8 @@ dependencies {
     runtimeOnly fg.deobf("mezz.jei:jei-1.15.2:6.0.2.12")
 
     compileOnly 'org.jetbrains:annotations:18.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     file("runtimeMods").eachFile { file ->
         def splitPos = file.name.lastIndexOf("-")
