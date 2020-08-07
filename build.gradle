@@ -119,6 +119,7 @@ repositories {
     maven {
         name = "TimeConqueror's Maven"
         url = "https://raw.githubusercontent.com/TimeConqueror/maven/master"
+        artifactUrls 'https://github.com/TimeConqueror/maven/blob/master/' //fallback url
     }
 //    maven {
 //        url = "./localmaven"
@@ -149,7 +150,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.minecraftforge:forge:1.15.2-31.2.31'
 
-    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-2.0.0.+', classifier:'deobf-20200710', changing: true
+    implementation group: 'ru.timeconqueror', name: 'TimeCore', version: '1.15.2-2.1.0.+', classifier:'dev-deobf-20200710', changing: true
     compile("org.spongepowered:mixin:0.8") {
         transitive = false
     }
@@ -158,8 +159,8 @@ dependencies {
 
     compileOnly 'org.jetbrains:annotations:18.0.0'
 
-    shade "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    shade "org.jetbrains.kotlin:kotlin-reflect"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     file("runtimeMods").eachFile { file ->
         def splitPos = file.name.lastIndexOf("-")
